@@ -9,16 +9,10 @@ import nonebot
 import re
 
 """导入变量"""
-try:
-    # 当 admin_model 为 1 时，调用 API，BOT 不需要为群主。
-    # 当 admin_model 为 2 时，使用 Nonebot 内置函数，BOT 必须为群主。
-    admin_model: int = nonebot.get_driver().config.admin_model
-    skey: str = nonebot.get_driver().config.skey
-    pskey: str = nonebot.get_driver().config.pskey
-except:
-    admin_model: int = 1
-    skey: str = ''
-    pskey: str = ''
+config = nonebot.get_driver().config
+admin_model: int =  getattr(config, "admin_model", 1)
+skey: str =  getattr(config, "skey", "")
+pskey: str =  getattr(config, "pskey", "")
 
 
 """响应部分"""
@@ -45,6 +39,7 @@ async def _(bot: Bot, event: GroupMessageEvent):
     # 模式判断
     if admin_model == 1:
         api = f'https://ovooa.com/API/quns/api.php?qq={owner_id}&skey={skey}&pskey={pskey}&group={gid}&uin={qid}&kt=1'
+        print(api)
         msg = await admin_api(api)
         await set_admin.send(f"{msg}", at_sender=True)
     elif admin_model == 2:
@@ -70,7 +65,7 @@ async def _(bot: Bot, event: GroupMessageEvent):
     if admin_model == 1:
         api = f'https://ovooa.com/API/quns/api.php?qq={owner_id}&skey={skey}&pskey={pskey}&group={gid}&uin={qid}&kt=2'
         msg = await admin_api(api)
-        await unset_admin.send(f"{msg}")
+        await unset_admin.send(f"{msg}", at_sender=True)
     elif admin_model == 2:
         try:
             await bot.set_group_admin(group_id=gid, user_id=qid, enable=False)
@@ -86,7 +81,10 @@ async def _(bot: Bot, event: GroupMessageEvent, msg: Message = CommandArg()):
     msg = msg.extract_plain_text().strip()
     # 这里去除 CQ 码提取数字并扩大 60 倍变单位为分钟
     time = int(re.sub(r"\[.*?\]", "", msg))*60
-    await bot.set_group_ban(group_id = event.group_id, user_id = qid, duration = time)
+    try:
+        await bot.set_group_ban(group_id = event.group_id, user_id = qid, duration = time)
+    except ActionFailed:
+        await unset_admin.send('权限不足捏', at_sender=True)
 
 @unban.handle()
 async def _(bot: Bot, event: GroupMessageEvent):
@@ -100,6 +98,7 @@ async def _(bot: Bot, event: GroupMessageEvent):
     gid = event.group_id
     try:
         await bot.set_group_kick(group_id=gid, user_id=qid, reject_add_request=False)
+        await kick.send(f'已移出群员{qid}')
     except ActionFailed:
         await kick.send('权限不足捏', at_sender=True)
 
@@ -110,6 +109,7 @@ async def _(bot: Bot, event: GroupMessageEvent):
     try:
         # reject_add_request=True 阻止再次申请
         await bot.set_group_kick(group_id=gid, user_id=qid, reject_add_request=True)
+        await kick.send(f'已移出并拉黑群员{qid}')
     except ActionFailed:
         await kick_ban.send('权限不足捏', at_sender=True)
 
