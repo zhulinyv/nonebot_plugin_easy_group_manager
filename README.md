@@ -6,25 +6,45 @@
 
 <div align="center">
 
-# nonebot_plugin_ping
-✨ping✨
+# nonebot_plugin_easy_group_manager
+✨女生自用 99 新简易群管✨
 
 </div>
 
-## 安装
-    1.pip install nonebot-plugin-ping
-    2.nb plugin install nonebot-plugin-ping
+### 📣前言
+
+女生自用 99 新简易群管，管理员设置新方案，BOT 不再必须为群主才能设置管理员。
+
+## ⭐ 安装
+    1.pip install nonebot-plugin-easy-group-manager
+    2.nb plugin install nonebot-plugin-easy-group-manager
     3.Download zip
 
-## 配置
+## 🛠️ 配置
 
-内置两种 ping 的方式，默认调用 API 获取。
+| 配置       | 类型 | 示例          | 默认 | 说明                                                               |
+| ---------- | --- | ------------- | ---- | ----------------------------------------------------------------- |
+| admin_mode | int | admin_model=1 | 1    | 1 为调用 API，BOT 不需要为群主；2 为使用 Nonebot 框架，BOT 必须为群主 |
+| skey       | str | skey="xxx"    | None | 获取看下文                                                         |
+| pskey      | str | pskey="xxx"   | None | 获取看下文                                                         |
 
-在 .env 配置文件中添加 `PING=2` 来更改**本地**运行 ping 指令。
+## 🎉 指令
 
-## 指令
+| 指令                              | 权限                              | 说明                                |
+| --------------------------------- | --------------------------------- | ---------------------------------- |
+| 设置管理员 + @somebody             | SUPERUSER/GROUP_OWNER             | 设置一个管理员                      |
+| 取消管理员 + @somebody             | SUPERUSER/GROUP_OWNER             | 取消一个管理员                      |
+| 禁言/口球  + @somebody + 阿拉伯数字 | SUPERUSER/GROUP_OWNER/GROUP_ADMIN | 禁言某人，单位分钟，需要 BOT 为管理员 |
+| 解禁 + @somebody                  | SUPERUSER/GROUP_OWNER/GROUP_ADMIN  | 解除某人禁言，需要 BOT 为管理员      |
+| 移出 + @somebody                  | SUPERUSER/GROUP_OWNER/GROUP_ADMIN  | 移出某人，需要 BOT 为管理员          |
+| 移出并拉黑 + @somebody             | SUPERUSER/GROUP_OWNER/GROUP_ADMIN | 移出并拉黑，需要 BOT 为管理员         |
 
-| 名称          | 示例                 | 说明                |
-| ------------ | -------------------- | ------------------ |
-| ping + url   | ping www.baidu.com   | ping 一个网址       |
-| qrcode + url | qrcode www.baidu.com | 给网址生成一个二维码 |
+## ⚠️ 获取 skey 和 pskey
+
+1、访问 [https://qun.qq.com/](https://qun.qq.com/), 并使用**群主** QQ 号登录。
+
+2、按 F12 并切换到 网络(Network) 视图。
+
+![image.png](https://s2.loli.net/2023/01/26/a4lLFwDbJjPmfSE.png)
+
+**skey=** 和 **p_skey=** 后面的内容(**不包括**后面的分号)即为需要的 skey 和 pskey。
