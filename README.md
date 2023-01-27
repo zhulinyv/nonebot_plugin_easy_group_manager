@@ -48,3 +48,7 @@
 ![image.png](https://s2.loli.net/2023/01/26/a4lLFwDbJjPmfSE.png)
 
 **skey=** 和 **p_skey=** 后面的内容(**不包括**后面的分号)即为需要的 skey 和 pskey。
+
+## ✨ FUTURE
+
+- [ ] 分群设置不同的 skey 和 pskey
