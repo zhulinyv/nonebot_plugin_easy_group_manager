@@ -39,6 +39,8 @@
 | 移出 + @somebody                  | SUPERUSER/GROUP_OWNER/GROUP_ADMIN  | 移出某人，需要 BOT 为管理员          |
 | 移出并拉黑 + @somebody             | SUPERUSER/GROUP_OWNER/GROUP_ADMIN | 移出并拉黑，需要 BOT 为管理员         |
 
+支持艾特多个用户。
+
 ## ⚠️ 获取 skey 和 pskey
 
 1、访问 [https://qun.qq.com/](https://qun.qq.com/), 并使用**群主** QQ 号登录。
