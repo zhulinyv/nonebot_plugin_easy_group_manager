@@ -49,6 +49,10 @@
 
 ![image.png](https://s2.loli.net/2023/01/26/a4lLFwDbJjPmfSE.png)
 
+## 联系我吖
+
+⚠️ 如果遇到任何部署、使用或二次开发上的问题或建议, 可以在 QQ频道: [我的中心花园-开发交流](https://pd.qq.com/s/8bkfowg3c) 找到我。
+
 **skey=** 和 **p_skey=** 后面的内容(**不包括**后面的分号)即为需要的 skey 和 pskey。
 
 ## ✨ FUTURE
